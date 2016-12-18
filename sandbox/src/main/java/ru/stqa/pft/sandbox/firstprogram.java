@@ -1,8 +1,9 @@
 package ru.stqa.pft.sandbox;
 
-public class Firstprogram {
+public class FirstProgram {
 
   public static void main(String[] args) {
-    System.out.println("Hello, world!");
+    System.out.println("Hello, World!");
+
   }
 }
