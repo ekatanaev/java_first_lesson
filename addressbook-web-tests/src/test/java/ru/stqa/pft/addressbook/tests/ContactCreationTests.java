@@ -6,11 +6,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.concurrent.TimeUnit;
 
-public class ContactCreationTests {
+public class ContactCreationTests extends TestBase {
   FirefoxDriver wd;
 
   @BeforeMethod
