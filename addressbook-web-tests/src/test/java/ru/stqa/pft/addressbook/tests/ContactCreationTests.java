@@ -8,10 +8,10 @@ public class ContactCreationTests extends TastBase {
 
   @Test
   public void testContactCreation() {
-    app.gotoContactCreation();
-    app.fillContactForm(new ContactData("Evgen", "Kat", "Ino", "123456789", "Ino@mail.ru"));
-    app.submitContactCreation();
-    app.returnToContactPage();
+    app.getContactHelper().gotoContactCreation();
+    app.getContactHelper().fillContactForm(new ContactData("Evgen", "Kat", "Ino", "123456789", "Ino@mail.ru"));
+    app.getContactHelper().submitContactCreation();
+    app.getContactHelper().returnToContactPage();
   }
 
 }

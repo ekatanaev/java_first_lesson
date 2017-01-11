@@ -4,12 +4,12 @@ import org.testng.annotations.Test;
 
 public class ContactDeletionTests extends TastBase {
 
-    @Test
-    public void testContactDeletion() {
-        app.gotoContactPage();
-        app.selectContact();
-        app.deleteSelectedContact();
-        app.confirmDeleteContacts();
-    }
+  @Test
+  public void testContactDeletion() {
+    app.getNavigationHelper().gotoContactPage();
+    app.getContactHelper().selectContact();
+    app.getContactHelper().deleteSelectedContact();
+    app.getContactHelper().confirmDeleteContacts();
+  }
 
 }
