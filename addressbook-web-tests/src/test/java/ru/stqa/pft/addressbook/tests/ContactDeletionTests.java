@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 
-public class ContactDeletionTests extends TastBase {
+public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion() {
@@ -10,3 +10,4 @@ public class ContactDeletionTests extends TastBase {
     app.getContactHelper().deleteSelectedContact();
     app.getContactHelper().confirmDeleteContacts();
   }
+}
