@@ -22,9 +22,9 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoContactPage() {
-    if (isElementPresent(By.id("maintable"))) {
-      return;
-    }
+//    if (isElementPresent(By.id("maintable"))) {
+//      return;
+//    }
     click(By.linkText("home"));
   }
 }
