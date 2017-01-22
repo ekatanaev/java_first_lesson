@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
+  private final String id;
   private final String firstName;
   private final String lastName;
   private final String company;
@@ -9,10 +10,24 @@ public class ContactData {
 
   public ContactData(String firstName, String lastName, String company, String tellNumber, String email) {
     this.firstName = firstName;
+    this.id = null;
     this.lastName = lastName;
     this.company = company;
     this.tellNumber = tellNumber;
     this.email = email;
+  }
+
+  public ContactData(String id, String firstName, String lastName, String company, String tellNumber, String email) {
+    this.firstName = firstName;
+    this.id = id;
+    this.lastName = lastName;
+    this.company = company;
+    this.tellNumber = tellNumber;
+    this.email = email;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public String getFirstName() {
@@ -38,11 +53,9 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-            "firstName='" + firstName + '\'' +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
-            ", company='" + company + '\'' +
-            ", tellNumber='" + tellNumber + '\'' +
-            ", email='" + email + '\'' +
             '}';
   }
 
@@ -53,21 +66,17 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != null ? !id.equals(that.id) : that.id != null) return false;
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-    if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-    if (company != null ? !company.equals(that.company) : that.company != null) return false;
-    if (tellNumber != null ? !tellNumber.equals(that.tellNumber) : that.tellNumber != null) return false;
-    return email != null ? email.equals(that.email) : that.email == null;
+    return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
 
   }
 
   @Override
   public int hashCode() {
-    int result = firstName != null ? firstName.hashCode() : 0;
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    result = 31 * result + (company != null ? company.hashCode() : 0);
-    result = 31 * result + (tellNumber != null ? tellNumber.hashCode() : 0);
-    result = 31 * result + (email != null ? email.hashCode() : 0);
     return result;
   }
 }
