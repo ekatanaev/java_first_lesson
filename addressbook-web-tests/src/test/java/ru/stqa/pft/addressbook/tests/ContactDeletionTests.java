@@ -7,14 +7,14 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion() {
         app.getNavigationHelper().gotoContactPage();
         if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("Evgen", "Kat", "Ino", null, null));
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectEditContact(0);
+        app.getContactHelper().selectContact(0);
         app.getContactHelper().deleteSelectedContact();
         app.getContactHelper().confirmDeleteContacts();
         List<ContactData> after = app.getContactHelper().getContactList();
