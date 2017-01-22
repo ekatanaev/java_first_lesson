@@ -4,9 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by e.katanaev on 11.01.2017.
@@ -49,8 +51,16 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.cssSelector("img[alt='Edit']")).get(index).click();
   }
 
+  public void selectEditContactById(int id) {
+    wd.findElement(By.cssSelector("img[alt='Edit'")).click();
+  }
+
   public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
+  }
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id +"']")).click();
   }
 
   public void contactPage() {
@@ -67,13 +77,14 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
     returnToContactPage();
   }
-  public void delete(int index) {
-    selectContact(index);
+
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
     deleteSelectedContact();
     confirmDeleteContacts();
   }
-  public void modify(int index, ContactData contact) {
-    selectEditContact(index);
+  public void modify(ContactData contact) {
+    selectEditContactById(contact.getId());
     fillContactForm(contact);
     submitContactModification();
     returnToContactPage();
@@ -87,8 +98,8 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
@@ -99,6 +110,7 @@ public class ContactHelper extends HelperBase {
     }
     return contacts;
   }
+
 }
 
 
