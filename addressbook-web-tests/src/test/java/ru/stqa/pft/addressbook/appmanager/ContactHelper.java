@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by e.katanaev on 11.01.2017.
@@ -52,15 +50,11 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectEditContactById(int id) {
-    wd.findElement(By.cssSelector("img[alt='Edit'")).click();
-  }
-
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+    wd.findElement(By.cssSelector(String.format("img[alt='Edit']", id))).click();
   }
 
   public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id +"']")).click();
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void contactPage() {
@@ -83,6 +77,7 @@ public class ContactHelper extends HelperBase {
     deleteSelectedContact();
     confirmDeleteContacts();
   }
+
   public void modify(ContactData contact) {
     selectEditContactById(contact.getId());
     fillContactForm(contact);
