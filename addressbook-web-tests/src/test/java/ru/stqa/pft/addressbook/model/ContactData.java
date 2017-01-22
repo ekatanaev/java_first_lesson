@@ -1,30 +1,13 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private int id;
-  private final String firstName;
-  private final String lastName;
-  private final String company;
-  private final String tellNumber;
-  private final String email;
+  private int id = Integer.MAX_VALUE;
+  private String firstName;
+  private String lastName;
+  private String company;
+  private String tellNumber;
+  private String email;
 
-  public ContactData(String firstName, String lastName, String company, String tellNumber, String email) {
-    this.firstName = firstName;
-    this.id = Integer.MAX_VALUE;
-    this.lastName = lastName;
-    this.company = company;
-    this.tellNumber = tellNumber;
-    this.email = email;
-  }
-
-  public ContactData(int id, String firstName, String lastName, String company, String tellNumber, String email) {
-    this.firstName = firstName;
-    this.id = id;
-    this.lastName = lastName;
-    this.company = company;
-    this.tellNumber = tellNumber;
-    this.email = email;
-  }
 
   public int getId() {
     return id;
@@ -48,6 +31,37 @@ public class ContactData {
 
   public String getEmail() {
     return email;
+  }
+
+
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withTellNumber(String tellNumber) {
+    this.tellNumber = tellNumber;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
   }
 
   @Override
@@ -76,9 +90,5 @@ public class ContactData {
     int result = firstName != null ? firstName.hashCode() : 0;
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 }
