@@ -42,7 +42,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void deleteSelectedContact() {
-    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    click(By.cssSelector("input[value='Delete']"));
   }
 
   public void selectEditContact(int index) {
@@ -50,7 +50,8 @@ public class ContactHelper extends HelperBase {
   }
 
   public void selectEditContactById(int id) {
-    wd.findElement(By.cssSelector(String.format("img[alt='Edit']", id))).click();
+    //wd.findElement(By.cssSelector(String.format("img[alt='Edit'" + id + "']"))).click();
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s'", id))).click();
   }
 
   public void selectContactById(int id) {
@@ -69,12 +70,14 @@ public class ContactHelper extends HelperBase {
     gotoContactCreation();
     fillContactForm(contact);
     submitContactCreation();
+    contactCache = null;
     returnToContactPage();
   }
 
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContact();
+    contactCache = null;
     confirmDeleteContacts();
   }
 
@@ -82,6 +85,7 @@ public class ContactHelper extends HelperBase {
     selectEditContactById(contact.getId());
     fillContactForm(contact);
     submitContactModification();
+    contactCache = null;
     returnToContactPage();
   }
 
@@ -93,17 +97,22 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Contacts contactCache = null;
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
       String lastName = cells.get(1).getText();
       String firstName = cells.get(2).getText();
-      contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
+      contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 
 }
