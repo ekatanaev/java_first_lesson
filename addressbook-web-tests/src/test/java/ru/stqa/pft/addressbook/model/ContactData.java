@@ -7,7 +7,38 @@ public class ContactData {
   private String company;
   private String tellNumber;
   private String email;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
 
+
+
+  public String getWorkPhone() {
+    return workPhone;
+  }
+
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public ContactData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
 
   public int getId() {
     return id;
