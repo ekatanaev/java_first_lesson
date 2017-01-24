@@ -10,7 +10,18 @@ public class ContactData {
   private String homePhone;
   private String mobilePhone;
   private String workPhone;
+  private String address;
   private String allPhones;
+
+  public String getAddress() {
+    return address;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
 
   public String getAllPhones() {
     return allPhones;
