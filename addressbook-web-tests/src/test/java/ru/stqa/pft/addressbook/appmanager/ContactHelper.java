@@ -27,6 +27,10 @@ public class ContactHelper extends HelperBase {
     type(By.name("company"), contactData.getCompany());
     type(By.name("home"), contactData.getTellNumber());
     type(By.name("email"), contactData.getEmail());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("home"), contactData.getHomePhone());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("work"), contactData.getWorkPhone());
   }
 
   public void submitContactCreation() {
@@ -66,6 +70,10 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
+  private void initContactViewById(int id) {
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
+  }
+
   public void create(ContactData contact) {
     gotoContactCreation();
     fillContactForm(contact);
@@ -79,6 +87,13 @@ public class ContactHelper extends HelperBase {
     deleteSelectedContact();
     contactCache = null;
     confirmDeleteContacts();
+  }
+
+  public String infoFromDetailsPage(ContactData contact) {
+    initContactViewById(contact.getId());
+    String contactContent = wd.findElement(By.id("content")).getText();
+    wd.navigate().back();
+    return contactContent;
   }
 
   public void modify(ContactData contact) {
