@@ -144,7 +144,7 @@ public class ContactHelper extends HelperBase {
             .withAddress(address).withEmail(email);
   }
 
-    private void initContactModificationById(int id) {
+  private void initContactModificationById(int id) {
     WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("td"));
