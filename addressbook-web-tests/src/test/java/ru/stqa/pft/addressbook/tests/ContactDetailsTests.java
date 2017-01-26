@@ -1,12 +1,14 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by e.katanaev on 25.01.2017.
@@ -28,14 +30,15 @@ public class ContactDetailsTests extends TestBase {
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
     String contactInfoFromDetailsPage = app.contact().infoFromDetailsPage(contact);
 
-    MatcherAssert.assertThat((cleanedPhones(cleanedMails(withoutEmptyLines(contactInfoFromDetailsPage))))
-            , equals(withoutEmptyLines(mergeContactInfoFromEditForm(contactInfoFromEditForm))));
+    assertThat((cleanedPhones(clearEmptyLines(contactInfoFromDetailsPage)))
+            , equalTo(clearEmptyLines(mergeContactInfoFromEditForm(contactInfoFromEditForm))));
   }
 
   private String mergeContactInfoFromEditForm(ContactData contact) {
     String mergedName = Arrays.asList(contact.getFirstName(), contact.getLastName())
             .stream().filter((s) -> !s.equals(""))
             .collect(Collectors.joining(" "));
+
     String mergedAddress = Arrays.asList(contact.getAddress())
             .stream().filter((s) -> !s.equals(""))
             .collect(Collectors.joining("\n"));
@@ -54,11 +57,7 @@ public class ContactDetailsTests extends TestBase {
     return s.replaceAll("\n[HWM]: ", "\n");
   }
 
-  public static String cleanedMails(String s) {
-    return s.replaceAll(" \\(w{3}.*\\)", "");
-  }
-
-  public static String withoutEmptyLines(String s) {
+  public static String clearEmptyLines(String s) {
     return s.replaceAll("\n\n", "\n");
   }
 }

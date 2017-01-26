@@ -89,12 +89,6 @@ public class ContactHelper extends HelperBase {
     confirmDeleteContacts();
   }
 
-  public String infoFromDetailsPage(ContactData contact) {
-    initContactViewById(contact.getId());
-    String contactContent = wd.findElement(By.id("content")).getText();
-    wd.navigate().back();
-    return contactContent;
-  }
 
   public void modify(ContactData contact) {
     selectEditContactById(contact.getId());
@@ -150,11 +144,18 @@ public class ContactHelper extends HelperBase {
             .withAddress(address).withEmail(email);
   }
 
-  private void initContactModificationById(int id) {
+    private void initContactModificationById(int id) {
     WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
+  }
+
+  public String infoFromDetailsPage(ContactData contact) {
+    initContactViewById(contact.getId());
+    String contactContent = wd.findElement(By.id("content")).getText();
+    wd.navigate().back();
+    return contactContent;
   }
 
 }
