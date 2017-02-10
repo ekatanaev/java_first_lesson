@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-  @Table(name = "addressbook")
-  public class ContactData {
+@Table(name = "addressbook")
+public class ContactData {
   @Id
   @Column(name = "id")
   private int id = Integer.MAX_VALUE;

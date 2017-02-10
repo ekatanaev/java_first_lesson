@@ -3,8 +3,10 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -90,7 +92,6 @@ public class ContactHelper extends HelperBase {
     confirmDeleteContacts();
   }
 
-
   public void modify(ContactData contact) {
     selectEditContactById(contact.getId());
     fillContactForm(contact);
@@ -159,7 +160,31 @@ public class ContactHelper extends HelperBase {
     return contactContent;
   }
 
+  public void submitAddToGroup() {
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void submitRemoveFromGroup() {
+    wd.findElement(By.name("remove")).click();
+  }
+
+  public void selectRelatedGroup(GroupData relatedGroup) {
+    new Select(wd.findElement(By.xpath("//select[@name='to_group']"))).selectByVisibleText(relatedGroup.getName());
+  }
+
+  public void filterByGroup(GroupData relatedGroup) {
+    new Select(wd.findElement(By.xpath("//select[@name='group']"))).selectByVisibleText(relatedGroup.getName());
+  }
+
+  public boolean isContactInGroup(ContactData modifiedContact, GroupData relatedGroup) {
+    boolean passed = false;
+    for (GroupData group : modifiedContact.getGroups()) {
+      System.out.println((group.getName() + " - related:" + relatedGroup.getName()));
+      if ((group.getName().equals(relatedGroup.getName()))) {
+        passed = true;
+      }
+    }
+    return passed;
+  }
+
 }
-
-
-
